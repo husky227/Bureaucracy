@@ -30,33 +30,42 @@ public class RoomManager : MonoBehaviour {
 		return tiles[randomFloorTileIndex];
 	}
 
-	public void generateRoom() {
-		int width = Random.Range (roomWidth.minimum, roomWidth.maximum+1);
-		int length = Random.Range (roomLength.minimum, roomLength.maximum+1);
-
+	public void generateRoom(float width, float length, Vector2 position) {
+		print (width);
+		print (length);
+		print (position.x);
+		print (position.y);
+		Vector3 relativePosition = new Vector3 (position.x, 0, position.y);
 		//instantiate floors
-		for (int i = -width; i <= width; i++) {
-			for (int j = -length; j <= length; j++) {
+		for (int i = 0; i*GRID_WIDTH <= width; i++) {
+			for (int j = 0; j*GRID_WIDTH <= length; j++) {
 				int randomFloorTileIndex = Random.Range(0, floorTiles.Length);
 				GameObject floor = getRandomTile(floorTiles);
-				putObjectAtGrid (i, 0, j, 0, floor);
+				putObjectAtGrid (i, 0, j, relativePosition, 0, floor);
 
 				//instantiate wall
-				if (i == -width || i == width || j == -length || j == length) {
+				if (i == 0 || i == width || j == 0 || j == length) {
 					GameObject wall = getRandomTile(wallTiles);
 					int angle = 0;
-					if (i == -width || i == width) {
+					if (i == 0 || i == width) {
 						angle = 90;
 					}
 
-					putObjectAtGrid (i, 1, j, angle, wall);
+					putObjectAtGrid (i, 1, j, relativePosition, angle, wall);
 				}
 			}
 		}
 	}
 
-	public void putObjectAtGrid(int indexX, int indexY, int indexZ, int angle, GameObject gameObject) {
-		Vector3 position = new Vector3 (GRID_WIDTH * indexX, GRID_WIDTH * indexY, GRID_WIDTH * indexZ);
+	public void generateRandomRoom() {
+		int width = Random.Range (roomWidth.minimum, roomWidth.maximum+1);
+		int length = Random.Range (roomLength.minimum, roomLength.maximum+1);
+
+		generateRoom(width, length, new Vector2(0, 0));
+	}
+
+	public void putObjectAtGrid(int indexX, int indexY, int indexZ, Vector3 relativePosition, int angle, GameObject gameObject) {
+		Vector3 position = new Vector3 (GRID_WIDTH * indexX + relativePosition.x, GRID_WIDTH * indexY + relativePosition.y, GRID_WIDTH * indexZ + relativePosition.z);
 		GameObject instance = Instantiate (gameObject, position, Quaternion.identity) as GameObject;
 		instance.transform.SetParent (roomHolder);
 		instance.transform.Rotate (0, angle, 0);
