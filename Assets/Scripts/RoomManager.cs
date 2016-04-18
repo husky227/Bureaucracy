@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	public const int GRID_WIDTH = 1;
+	private const float EPSILON = 1.1f;
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
 	private Transform roomHolder;
@@ -30,12 +31,9 @@ public class RoomManager : MonoBehaviour {
 		return tiles[randomFloorTileIndex];
 	}
 
-	public void generateRoom(float width, float length, Vector2 position) {
-		print (width);
-		print (length);
-		print (position.x);
-		print (position.y);
+	public void generateRoom(float width, float length, Vector2 position, Vector2 door) {
 		Vector3 relativePosition = new Vector3 (position.x, 0, position.y);
+
 		//instantiate floors
 		for (int i = 0; i*GRID_WIDTH <= width; i++) {
 			for (int j = 0; j*GRID_WIDTH <= length; j++) {
@@ -45,6 +43,11 @@ public class RoomManager : MonoBehaviour {
 
 				//instantiate wall
 				if (i == 0 || i == width || j == 0 || j == length) {
+					Debug.Log (door.x);
+					Debug.Log (door.y);
+					if (Mathf.Abs(GRID_WIDTH * i + relativePosition.x - door.x) < EPSILON && Mathf.Abs(GRID_WIDTH * j + relativePosition.z - door.y) < EPSILON ) {
+						continue;
+					}
 					GameObject wall = getRandomTile(wallTiles);
 					int angle = 0;
 					if (i == 0 || i == width) {
@@ -61,7 +64,7 @@ public class RoomManager : MonoBehaviour {
 		int width = Random.Range (roomWidth.minimum, roomWidth.maximum+1);
 		int length = Random.Range (roomLength.minimum, roomLength.maximum+1);
 
-		generateRoom(width, length, new Vector2(0, 0));
+		generateRoom(width, length, new Vector2(0, 0), new Vector2(-1000, -1000));
 	}
 
 	public void putObjectAtGrid(int indexX, int indexY, int indexZ, Vector3 relativePosition, int angle, GameObject gameObject) {
