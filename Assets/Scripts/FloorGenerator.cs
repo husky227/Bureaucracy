@@ -71,6 +71,9 @@ public class FloorGenerator : MonoBehaviour {
 	//what is a chance that we will not split chunk into smaller rooms
 	public float NO_ROOM_SPLIT_CHANCE = 0.15f;
 
+	public int NO_OF_STAMPS = 10;
+	private int alreadyPlacedStamps = 0;
+
 	public RoomManager roomManager;
 
 	public void setRoomManager(RoomManager roomManager) {
@@ -128,6 +131,10 @@ public class FloorGenerator : MonoBehaviour {
 			float width = Mathf.Abs (root.start.x - root.end.x);
 			float length = Mathf.Abs (root.start.y - root.end.y);
 			roomManager.generateRoom (width, length, root.start, root.doors);
+
+			if (alreadyPlacedStamps < NO_OF_STAMPS) {
+				roomManager.placeStamp (new Vector3 (root.start.x + width / 2, 1, root.start.y + length / 2));
+			}
 		}
 	}
 

@@ -21,6 +21,7 @@ public class RoomManager : MonoBehaviour {
 	private const float EPSILON = 1.1f;
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
+	public GameObject stamp;
 	private Transform roomHolder;
 
 	public Count roomWidth = new Count(5, 15);
@@ -58,6 +59,12 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void placeStamp(Vector3 position) {
+		GameObject instance = Instantiate (stamp, position, Quaternion.identity) as GameObject;
+		instance.transform.SetParent (roomHolder);
+		instance.transform.Rotate (0, 0, 0);
 	}
 
 	public void generateRandomRoom() {
