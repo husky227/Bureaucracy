@@ -293,8 +293,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTiles:
   - {fileID: 176728, guid: 2aab2d364c9884d24885aaa4994f126d, type: 2}
+  - {fileID: 176728, guid: 4c67d642815c445da97d3a8c70f28074, type: 2}
+  - {fileID: 176728, guid: 7f22ce65d3838469dba29eff205a448a, type: 2}
+  - {fileID: 176728, guid: f43d266207da54d86b60b2e01e690d2d, type: 2}
+  - {fileID: 176728, guid: 967067fef50894f90836774961c86ba7, type: 2}
+  - {fileID: 176728, guid: ebbe1704d4ea24f25b5d9bde832aeb68, type: 2}
+  - {fileID: 176728, guid: 37fa70e4c650d4872a6a4811af539d86, type: 2}
+  - {fileID: 176728, guid: d3f5166826b1144b49b94a58e1c57b44, type: 2}
+  - {fileID: 176728, guid: e6ca11979b00840f2885cafaf7d53f3b, type: 2}
+  - {fileID: 176728, guid: 4a79f8823095f4d9485ffc567eca6923, type: 2}
   wallTiles:
   - {fileID: 161644, guid: 74cec6212ab804a8fb63ea097fb06ce8, type: 2}
+  ceilingTiles:
+  - {fileID: 190108, guid: e07f30588697042c4983ec6c60609189, type: 2}
+  ceilingLamps:
+  - {fileID: 120032, guid: abcb55ad003af4da191b8316c3ec44c0, type: 2}
   stamp: {fileID: 179672, guid: 503bf563d17764af898c41287d5dabe9, type: 2}
   roomWidth:
     maximum: 15

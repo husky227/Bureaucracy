@@ -19,8 +19,11 @@ public class RoomManager : MonoBehaviour {
 
 	public const int GRID_WIDTH = 1;
 	private const float EPSILON = 1.1f;
+	public const int FLOOR_HEIGHT = 5;
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
+	public GameObject[] ceilingTiles;
+	public GameObject[] ceilingLamps;
 	public GameObject stamp;
 	private Transform roomHolder;
 
@@ -36,11 +39,20 @@ public class RoomManager : MonoBehaviour {
 		Vector3 relativePosition = new Vector3 (position.x, 0, position.y);
 
 		//instantiate floors
+		GameObject wall = getRandomTile(wallTiles);
+		GameObject floor = getRandomTile(floorTiles);
+		GameObject ceiling = getRandomTile(ceilingTiles);
+		GameObject lamp = getRandomTile(ceilingLamps);
 		for (int i = 0; i*GRID_WIDTH <= width; i++) {
 			for (int j = 0; j*GRID_WIDTH <= length; j++) {
 				int randomFloorTileIndex = Random.Range(0, floorTiles.Length);
-				GameObject floor = getRandomTile(floorTiles);
+
 				putObjectAtGrid (i, 0, j, relativePosition, 0, floor);
+				putObjectAtGrid (i, FLOOR_HEIGHT, j, relativePosition, 0, ceiling);
+
+				if (i % 15 == 0 && j % 15 == 0) {
+					putObjectAtGrid (i, FLOOR_HEIGHT, j, relativePosition, 0, lamp);
+				}
 
 				//instantiate wall
 				if (i == 0 || i == width || j == 0 || j == length) {
@@ -49,7 +61,7 @@ public class RoomManager : MonoBehaviour {
 					if (Mathf.Abs(GRID_WIDTH * i + relativePosition.x - door.x) < EPSILON && Mathf.Abs(GRID_WIDTH * j + relativePosition.z - door.y) < EPSILON ) {
 						continue;
 					}
-					GameObject wall = getRandomTile(wallTiles);
+
 					int angle = 0;
 					if (i == 0 || i == width) {
 						angle = 90;

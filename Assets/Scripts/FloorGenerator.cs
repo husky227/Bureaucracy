@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class FloorGenerator : MonoBehaviour {
@@ -143,5 +144,6 @@ public class FloorGenerator : MonoBehaviour {
 		generateCorridors (root, false);
 		generateRooms (root, false);
 		drawRooms (root);
+		Lightmapping.Bake ();
 	}
 }
