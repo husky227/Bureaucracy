@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FloorGenerator : MonoBehaviour {
 	private const float SPLIT_RANDOM_RANGE_MIN = 0.35f;
 	private const float SPLIT_RANDOM_RANGE_MAX = 0.65f;
 
 	private const int CORRIDOR_WIDTH = 4;
+
+	public List<RoomInfo> rooms = new List <RoomInfo> ();
 
 	public class Node {
 		public Node left = null;
@@ -136,14 +139,19 @@ public class FloorGenerator : MonoBehaviour {
 			if (alreadyPlacedStamps < NO_OF_STAMPS) {
 				roomManager.placeStamp (new Vector3 (root.start.x + width / 2, 1, root.start.y + length / 2));
 			}
+
+			RoomInfo roomInfo = new RoomInfo ();
+			roomInfo.position = new Vector2 (root.start.x, root.start.y);
+			roomInfo.size = new Vector2 (width, length);
+			rooms.Add (roomInfo);
 		}
 	}
 
 	public void generateFloor() {
+		rooms = new List<RoomInfo> ();
 		Node root = new Node(new Vector2(0, 0), new Vector2(FLOOR_WIDTH, FLOOR_LENGTH), new Vector2(-1000, -1000));
 		generateCorridors (root, false);
 		generateRooms (root, false);
 		drawRooms (root);
-		Lightmapping.Bake ();
 	}
 }
