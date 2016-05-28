@@ -36,14 +36,14 @@ public class FloorGenerator : MonoBehaviour {
 
 			if (rotated) {
 				//split width
-				float newX = start.x + width*splitted;
+				float newX = Mathf.Floor(start.x + width*splitted);
 				Vector2 doors = (hasDoors)? new Vector2(newX-margin, start.y+length/2) : new Vector2(-1000, -1000);
 				left = new Node(new Vector2(start.x, start.y), new Vector2(newX-margin, end.y), doors);
 				center = (corridor)? new Node(new Vector2(newX-margin, start.y), new Vector2(newX+margin, end.y), doors) : null;
 				right = new Node(new Vector2(newX+margin, start.y), new Vector2(end.x, end.y), doors);
 			} else {
 				//split length
-				float newY = start.y + length*splitted;
+				float newY = Mathf.Floor(start.y + length*splitted);
 				Vector2 doors = (hasDoors)? new Vector2(start.x + width/2, newY-margin) : new Vector2(-1000, -1000);
 				left = new Node(new Vector2(start.x, start.y), new Vector2(end.x, newY-margin), doors);
 				center = (corridor)? new Node(new Vector2(start.x, newY-margin), new Vector2(end.x, newY + margin), doors) : null;

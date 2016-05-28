@@ -10,11 +10,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
-        public float mouseSensitivity = 5.0f;
-        public float upDownRange = 60.0f;
-
-        private float verticalRotation = 0.0f;
-
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
@@ -22,7 +17,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
-        //[SerializeField] private MouseLook m_MouseLook;
+        [SerializeField] private MouseLook m_MouseLook;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -59,7 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			//m_MouseLook.Init(transform , m_Camera.transform);
+			m_MouseLook.Init(transform , m_Camera.transform);
         }
 
 
@@ -107,7 +102,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, ~0, QueryTriggerInteraction.Ignore);
+                               m_CharacterController.height/2f);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
             m_MoveDir.x = desiredMove.x*speed;
@@ -134,8 +129,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
-
-            //m_MouseLook.UpdateCursorLock();
         }
 
 
@@ -241,14 +234,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            //m_MouseLook.LookRotation (transform, m_Camera.transform);
-
-            float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
-            transform.Rotate(0, rotLeftRight, 0);
-
-            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-            verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
-            m_Camera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+            m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
 
