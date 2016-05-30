@@ -19,7 +19,7 @@ public class DoorOpener : MonoBehaviour {
 	}
 
 	void toggleDoors() {
-		Vector3 hinge = new Vector3 (transform.position.x, transform.position.y, transform.position.z + Config.DOOR_WIDTH / 2);
+		Vector3 hinge = new Vector3 (transform.position.x, transform.position.y, transform.position.z + Config.DOOR_WIDTH / 4);
 		if (!closed) {
 			doors.transform.RotateAround (hinge, new Vector3 (0, 1, 0), 90);
 		} else {

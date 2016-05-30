@@ -315,6 +315,8 @@ MonoBehaviour:
   ceilingTiles:
   - {fileID: 190108, guid: e07f30588697042c4983ec6c60609189, type: 2}
   ceilingLamps: []
+  doors:
+  - {fileID: 146288, guid: 2e04ccc3353634fa9a428fa3f0871a82, type: 2}
   roomHolder: {fileID: 1050900175}
 --- !u!114 &422840081
 MonoBehaviour:
@@ -864,7 +866,7 @@ GameObject:
   - 114: {fileID: 2054306631}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

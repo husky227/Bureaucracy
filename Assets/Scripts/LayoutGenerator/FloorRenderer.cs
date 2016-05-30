@@ -7,17 +7,20 @@ public class FloorRenderer : MonoBehaviour
 	public GameObject[] wallTiles;
 	public GameObject[] ceilingTiles;
 	public GameObject[] ceilingLamps;
+	public GameObject[] doors;
 
 	public Transform roomHolder;
 
 	public void renderFloor(OneCorridorFloorGenerator generator) {
 		GameObject floor = getRandomTile(floorTiles);
+		GameObject door = getRandomTile(doors);
 		drawFloor (generator.corridor.position, generator.corridor.size, floor);
 		floor = getRandomTile(floorTiles);
 		GameObject wall = getRandomTile(wallTiles);
 		foreach(Room room in generator.rooms) {
 			drawFloor (room.position, room.size, floor);
 			drawWalls (room, wall);
+			placeDoors (room, door);
 		}
 
 		drawCorridorFloors (generator.corridor, wall);
@@ -47,6 +50,8 @@ public class FloorRenderer : MonoBehaviour
 			Vector3 wallPosition2 = new Vector3(room.position.x, room.position.y+Config.FLOOR_HEIGHT/2, room.position.z + positionRight );
 			Vector3 scale2 = new Vector3(0.1f, Config.FLOOR_HEIGHT, sizeRight);
 			drawWall (wall, wallPosition2, scale2);
+
+
 		}
 		if (room.doorSide != Side.EAST) {
 			Vector3 wallPosition = new Vector3(room.position.x + room.size.x, room.position.y+Config.FLOOR_HEIGHT/2, room.position.z + room.size.y/2);
@@ -98,6 +103,31 @@ public class FloorRenderer : MonoBehaviour
 			Vector3 wallPosition2 = new Vector3(room.position.x + positionRight, room.position.y+Config.FLOOR_HEIGHT/2, room.position.z + room.size.y  );
 			Vector3 scale2 = new Vector3(sizeRight, Config.FLOOR_HEIGHT, 0.1f);
 			drawWall (wall, wallPosition2, scale2);
+		}
+	}
+
+	private void placeDoors (Room room, GameObject doors) {
+		if (room.doorSide == Side.WEST) {
+			Vector3 position = new Vector3(room.position.x, 0, room.position.z+ room.doorPosition - Config.DOOR_WIDTH/4 );
+			GameObject instance = Instantiate (doors, position, Quaternion.identity) as GameObject;
+			instance.transform.SetParent (roomHolder);
+			instance.transform.Rotate(new Vector3 (0, 90, 0));
+		}
+		if (room.doorSide == Side.EAST) {
+			Vector3 position = new Vector3(room.position.x  + room.size.x, 0, room.position.z+ room.doorPosition - Config.DOOR_WIDTH/4 );
+			GameObject instance = Instantiate (doors, position, Quaternion.identity) as GameObject;
+			instance.transform.SetParent (roomHolder);
+			instance.transform.Rotate(new Vector3 (0, 90, 0));
+		}
+		if (room.doorSide == Side.NORTH) {
+			Vector3 position = new Vector3(room.position.x  + room.doorPosition - Config.DOOR_WIDTH/4 , 0, room.position.z);
+			GameObject instance = Instantiate (doors, position, Quaternion.identity) as GameObject;
+			instance.transform.SetParent (roomHolder);
+		}
+		if (room.doorSide == Side.SOUTH) {
+			Vector3 position = new Vector3(room.position.x  + room.doorPosition - Config.DOOR_WIDTH/4 , 0, room.position.z + room.size.z);
+			GameObject instance = Instantiate (doors, position, Quaternion.identity) as GameObject;
+			instance.transform.SetParent (roomHolder);
 		}
 	}
 
