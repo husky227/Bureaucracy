@@ -22,6 +22,7 @@ public class RoomManager : MonoBehaviour {
 	public const int FLOOR_HEIGHT = 5;
 	public const float DOOR_WIDTH = 4f;
 	public const float WALL_WIDTH = 0.1f;
+	public const float LAMP_AREA = 10f; //every LAMP_AREA there should be one lamp
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
 	public GameObject[] ceilingTiles;
@@ -64,9 +65,13 @@ public class RoomManager : MonoBehaviour {
 		placeWall (2, width, length, wall, centerPosition, wallHeight, door, true);
 		placeWall (3, width, length, wall, centerPosition, wallHeight, door, true);
 
-		Vector3 lampPosition = new Vector3 (centerPosition.x, centerPosition.y+5f, centerPosition.z);
-		GameObject lampInstance = Instantiate (lamp, lampPosition, Quaternion.identity) as GameObject;
-		lampInstance.transform.SetParent (roomHolder);
+		for (float x = (width % LAMP_AREA) / 2; x <= width; x += LAMP_AREA) {
+			for (float y = (length % LAMP_AREA) / 2; y <= length; y += LAMP_AREA) {
+				Vector3 lampPosition = new Vector3 (relativePosition.x + x, FLOOR_HEIGHT+relativePosition.y, relativePosition.z + y);
+				GameObject lampInstance = Instantiate (lamp, lampPosition, Quaternion.identity) as GameObject;
+				lampInstance.transform.SetParent (roomHolder);
+			}
+		}
 	}
 
 	public void placeWall(int number, float width, float length, GameObject wall, Vector3 centerPosition, float wallHeight, Vector2 door, Boolean checkDoors) {
