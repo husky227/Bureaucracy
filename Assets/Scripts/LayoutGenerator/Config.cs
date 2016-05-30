@@ -3,14 +3,14 @@ using System.Collections;
 
 public class Config
 {
-	public float MIN_CORRIDOR_WIDTH = 40f;
-	public float MAX_CORRIDOR_WIDTH = 100f;
+	public static int MIN_CORRIDOR_WIDTH = 20;
+	public static int MAX_CORRIDOR_WIDTH = 100;
 
-	public float MIN_ROOM_WIDTH = 3f;
-	public float MAX_ROOM_WIDTH = 25f;
+	public static int MIN_ROOM_WIDTH = 3;
+	public static int MAX_ROOM_WIDTH = 35;
 
-	public float FLOOR_HEIGHT = 5f;
+	public static int FLOOR_HEIGHT = 5;
 
-	public float DOOR_WIDTH = 2f;
+	public static float DOOR_WIDTH = 4f;
 }
 

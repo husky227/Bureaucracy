@@ -3,20 +3,29 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
-	private RoomManager roomManager; 
+	/*private RoomManager roomManager; 
 	private FloorGenerator floorGenerator; 
-	private MiniMapGenerator minimapGenerator;
+	private MiniMapGenerator minimapGenerator;*/
+
+	private OneCorridorFloorGenerator floorGenerator;
+	private FloorRenderer renderer;
 
 	void Awake() {
-		roomManager = GetComponent<RoomManager> ();
+		floorGenerator = GetComponent<OneCorridorFloorGenerator> ();
+		floorGenerator.generateFloor ();
+
+		renderer = GetComponent<FloorRenderer> ();
+		renderer.renderFloor (floorGenerator);
+
+		/*roomManager = GetComponent<RoomManager> ();
 		floorGenerator = GetComponent<FloorGenerator> ();
 		minimapGenerator = GetComponent<MiniMapGenerator> ();
-		floorGenerator.setRoomManager (roomManager);
+		floorGenerator.setRoomManager (roomManager);*/
 		InitGame ();
 	}
 
 	void InitGame() {
-		floorGenerator.generateFloor ();
-		minimapGenerator.generateMiniMap (floorGenerator.rooms);
+		/*floorGenerator.generateFloor ();
+		minimapGenerator.generateMiniMap (floorGenerator.rooms);*/
 	}
 }

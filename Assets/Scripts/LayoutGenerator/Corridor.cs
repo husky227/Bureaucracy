@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
-public class Corridor : MonoBehaviour {
+public class Corridor {
 	public class OpenSides {
 		public bool west = false;
 		public bool east = false;
@@ -29,8 +30,8 @@ public class Corridor : MonoBehaviour {
 		position = new UnityEngine.Vector3 (0, 0, 0);
 		size = new UnityEngine.Vector2 (0, 0);
 
-		var v = CorridorType.GetValues ();
-		corridorType = v.GetValue (random.Next (v.Length));
+		var v = Enum.GetValues (typeof(CorridorType));
+		corridorType = (CorridorType)v.GetValue (random.Next (v.Length));
 
 		int width = 0;
 		int length = 0;
@@ -42,11 +43,11 @@ public class Corridor : MonoBehaviour {
 			break;
 		default:
 			width = random.Next (Config.MIN_CORRIDOR_WIDTH, Config.MAX_CORRIDOR_WIDTH);
-			length = Mathf.FloorToInt(Mathf.Min(random.Next (Config.MIN_CORRIDOR_WIDTH, Config.MAX_CORRIDOR_WIDTH), width/2));
+			length = Mathf.FloorToInt(Mathf.Min(random.Next (Config.MIN_CORRIDOR_WIDTH, Config.MAX_CORRIDOR_WIDTH), width/3));
 			break;
 		}
 
-		size.Set (width, length);
+		size = new UnityEngine.Vector2 (width, length);
 
 		openSides = new OpenSides ();
 		switch (corridorType) {
