@@ -114,25 +114,21 @@ public class FloorRenderer : MonoBehaviour
 
 	private void drawCorridorFloors(Corridor corridor, GameObject wall) {
 		if (corridor.openSides.east) {
-			Debug.Log ("east");
 			Vector3 wallPosition = new Vector3(corridor.position.x + corridor.size.x, corridor.position.y+Config.FLOOR_HEIGHT/2, corridor.position.z + corridor.size.y/2);
 			Vector3 scale = new Vector3(0.1f, Config.FLOOR_HEIGHT, corridor.size.y);
 			drawWall (wall, wallPosition, scale);
 		}
 		if (corridor.openSides.west) {
-			Debug.Log ("west");
 			Vector3 wallPosition = new Vector3(corridor.position.x, corridor.position.y+Config.FLOOR_HEIGHT/2, corridor.position.z + corridor.size.y/2);
 			Vector3 scale = new Vector3(0.1f, Config.FLOOR_HEIGHT, corridor.size.y);
 			drawWall (wall, wallPosition, scale);
 		}
 		if (corridor.openSides.north) {
-			Debug.Log ("north");
 			Vector3 wallPosition = new Vector3(corridor.position.x + corridor.size.x/2, corridor.position.y+Config.FLOOR_HEIGHT/2, corridor.position.z);
 			Vector3 scale = new Vector3(corridor.size.x, Config.FLOOR_HEIGHT, 0.1f);
 			drawWall (wall, wallPosition, scale);
 		}
 		if (corridor.openSides.south) {
-			Debug.Log ("south");
 			Vector3 wallPosition = new Vector3(corridor.position.x + corridor.size.x/2, corridor.position.y+Config.FLOOR_HEIGHT/2, corridor.position.z - corridor.size.y);
 			Vector3 scale = new Vector3(corridor.size.x, Config.FLOOR_HEIGHT, 0.1f);
 			drawWall (wall, wallPosition, scale);

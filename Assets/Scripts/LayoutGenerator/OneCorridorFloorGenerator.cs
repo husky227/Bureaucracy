@@ -10,7 +10,7 @@ public class OneCorridorFloorGenerator : MonoBehaviour
 
 	System.Random roomRandom;
 
-	int corridorSalt = 42;
+	int corridorSalt = 123;
 	int roomsSalt = 151900;
 
 	public OneCorridorFloorGenerator ()
@@ -24,16 +24,16 @@ public class OneCorridorFloorGenerator : MonoBehaviour
 		Debug.Log (corridor);
 		corridor.randomizeCorridor (corridorSalt);
 
-		if (corridor.openSides.east) {
+		if (!corridor.openSides.east) {
 			generateEastSideRooms ();
 		}
-		if (corridor.openSides.west) {
+		if (!corridor.openSides.west) {
 			generateWestSideRooms ();
 		}
-		if (corridor.openSides.north) {
+		if (!corridor.openSides.north) {
 			generateNorthSideRooms ();
 		}
-		if (corridor.openSides.south) {
+		if (!corridor.openSides.south) {
 			generateSouthSideRooms ();
 		}
 	}
