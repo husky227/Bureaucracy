@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Floor
   - Stamp
+  - Door
   layers:
   - Default
   - TransparentFX
