@@ -14,21 +14,35 @@ public class FloorRenderer : MonoBehaviour
 	public void renderFloor(OneCorridorFloorGenerator generator) {
 		GameObject floor = getRandomTile(floorTiles);
 		GameObject door = getRandomTile(doors);
+		GameObject ceiling = getRandomTile(ceilingTiles);
+		GameObject lamp = getRandomTile(ceilingLamps);
+
 		drawFloor (generator.corridor.position, generator.corridor.size, floor);
+		drawCeiling (generator.corridor.position, generator.corridor.size, ceiling);
 		floor = getRandomTile(floorTiles);
 		GameObject wall = getRandomTile(wallTiles);
 		foreach(Room room in generator.rooms) {
 			drawFloor (room.position, room.size, floor);
+			drawCeiling (room.position, room.size, ceiling);
 			drawWalls (room, wall);
 			placeDoors (room, door);
+			placeLamps (room.position, room.size, lamp);
 		}
 
+		placeLamps (generator.corridor.position, generator.corridor.size, lamp);
 		drawCorridorFloors (generator.corridor, wall);
 	}
 
 	public void drawFloor(Vector3 position, Vector2 size, GameObject floor) {
-		Vector3 floorPosition = new Vector3(position.x + size.x/2, position.y, position.z + size.y/2);
+		Vector3 floorPosition = new Vector3(position.x + size.x/2, position.y-0.1f, position.z + size.y/2);
 		GameObject instance = Instantiate (floor, floorPosition, Quaternion.identity) as GameObject;
+		instance.transform.SetParent (roomHolder);
+		instance.transform.localScale = new Vector3(size.x, 0.1f, size.y);
+	}
+
+	public void drawCeiling(Vector3 position, Vector2 size, GameObject ceiling) {
+		Vector3 ceilingPosition = new Vector3(position.x + size.x/2, position.y + Config.FLOOR_HEIGHT-0.5f, position.z + size.y/2);
+		GameObject instance = Instantiate (ceiling, ceilingPosition, Quaternion.identity) as GameObject;
 		instance.transform.SetParent (roomHolder);
 		instance.transform.localScale = new Vector3(size.x, 0.1f, size.y);
 	}
@@ -135,6 +149,20 @@ public class FloorRenderer : MonoBehaviour
 		GameObject instance = Instantiate (wall, position, Quaternion.identity) as GameObject;
 		instance.transform.SetParent (roomHolder);
 		instance.transform.localScale = scale;
+	}
+
+	private void placeLamps(Vector3 position, Vector2 size, GameObject lamp) {
+		float width = size.x;
+		float length = size.y;
+		float lampHeight = lamp.GetComponent<BoxCollider> ().size.y/2;
+
+		for (float x = (width % Config.LAMP_AREA) / 2; x <= width; x += Config.LAMP_AREA) {
+			for (float y = (length %  Config.LAMP_AREA) / 2; y <= length; y += Config.LAMP_AREA) {
+				Vector3 lampPosition = new Vector3 (position.x + x, Config.FLOOR_HEIGHT+position.y-lampHeight, position.z + y);
+				GameObject lampInstance = Instantiate (lamp, lampPosition, Quaternion.identity) as GameObject;
+				lampInstance.transform.SetParent (roomHolder);
+			}
+		}
 	}
 		
 	private GameObject getRandomTile(GameObject[] tiles) {

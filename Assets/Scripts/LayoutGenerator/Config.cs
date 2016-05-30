@@ -12,5 +12,7 @@ public class Config
 	public static int FLOOR_HEIGHT = 5;
 
 	public static float DOOR_WIDTH = 4f;
+
+	public const float LAMP_AREA = 10f; //every LAMP_AREA there should be one lamp
 }
 

@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 428016}
   - 33: {fileID: 3348786}
   - 23: {fileID: 2309692}
+  - 65: {fileID: 6518416}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179298}
   m_Mesh: {fileID: 4300000, guid: ed676e4f39c168549bec09ecb638c51a, type: 3}
+--- !u!65 &6518416
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9401057, y: 2.1117086, z: 0.8606163}
+  m_Center: {x: 0, y: -0.000000059604645, z: 0}
 --- !u!108 &10822452
 Light:
   m_ObjectHideFlags: 1
@@ -131,7 +144,7 @@ Light:
   m_Type: 0
   m_Color: {r: 0.9264706, g: 0.96957403, b: 1, a: 1}
   m_Intensity: 2.8
-  m_Range: 9.111757
+  m_Range: 5
   m_SpotAngle: 164
   m_CookieSize: 10
   m_Shadows:
@@ -164,7 +177,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.9264706, g: 0.96957403, b: 1, a: 1}
   m_Intensity: 0.24
-  m_Range: 9.111757
+  m_Range: 5
   m_SpotAngle: 164
   m_CookieSize: 10
   m_Shadows:
