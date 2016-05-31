@@ -41,10 +41,10 @@ public class FloorRenderer : MonoBehaviour
 	}
 
 	public void drawCeiling(Vector3 position, Vector2 size, GameObject ceiling) {
-		/*Vector3 ceilingPosition = new Vector3(position.x + size.x/2, position.y + Config.FLOOR_HEIGHT-0.5f, position.z + size.y/2);
+		Vector3 ceilingPosition = new Vector3(position.x + size.x/2, position.y + Config.FLOOR_HEIGHT-0.5f, position.z + size.y/2);
 		GameObject instance = Instantiate (ceiling, ceilingPosition, Quaternion.identity) as GameObject;
 		instance.transform.SetParent (roomHolder);
-		instance.transform.localScale = new Vector3(size.x, 0.1f, size.y);*/
+		instance.transform.localScale = new Vector3(size.x, 0.1f, size.y);
 	}
 
 	public void drawWalls(Room room, GameObject wall) {

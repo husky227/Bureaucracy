@@ -13,7 +13,7 @@ public class Config
 
 	public static float DOOR_WIDTH = 4f;
 
-	public const float LAMP_AREA = 10f; //every LAMP_AREA there should be one lamp
+	public const float LAMP_AREA = 20f; //every LAMP_AREA there should be one lamp
 
 	public const float MAX_BATHROOM_AREA = 25f;
 

@@ -33,6 +33,7 @@ public class RoomArranger : MonoBehaviour
 			arrangeStorageArea (room);
 			return;
 		}
+		placeFurniture (room);
 	}
 
 	public void arrangeCorridor(Corridor corridor) {
@@ -56,6 +57,32 @@ public class RoomArranger : MonoBehaviour
 		if (corridor.openSides.south) {
 			position = new Vector3 (corridor.position.x+corridor.size.x/2, corridor.position.y, corridor.position.z+corridor.size.y-length/2);
 			placeObject (group, position, scale, rotate);
+		}
+	}
+
+	public void placeFurniture (Room room) {
+		float takenArea = 0;
+		float roomArea = room.size.x * room.size.y;
+		int counter = 0;
+		while (takenArea < roomArea*0.5 && counter < 20) {
+			counter++; 
+
+			GameObject group = getRandomTile (furniture);
+			float width = getWidth (group);
+			float length = getLength (group);
+
+			//add some space
+			width *= 1.5f;
+			length *= 1.5f;
+			float minX = width;
+			float maxX = room.size.x - width - minX;
+			float minY = length;
+			float maxY = room.size.y - length - minY;
+
+			float x = (float)random.NextDouble ()*maxX + minX;
+			float y = (float)random.NextDouble ()*maxY + minY;
+
+			placeObject(group, new Vector3(room.position.x + x, room.position.y, room.position.z + y), new Vector3(1, 1, 1), new Vector3(0, 0, 0));
 		}
 	}
 
