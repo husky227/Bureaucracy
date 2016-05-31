@@ -27,6 +27,7 @@ GameObject:
   - 33: {fileID: 3348786}
   - 23: {fileID: 2309692}
   - 65: {fileID: 6518416}
+  - 114: {fileID: 11401782}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -143,7 +144,7 @@ Light:
   serializedVersion: 6
   m_Type: 0
   m_Color: {r: 0.9264706, g: 0.96957403, b: 1, a: 1}
-  m_Intensity: 1.8
+  m_Intensity: 2.8
   m_Range: 5
   m_SpotAngle: 164
   m_CookieSize: 10
@@ -199,6 +200,17 @@ Light:
   m_ShadowRadius: 0.1
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11401782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916108bb4717444c1a0a072df97df81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

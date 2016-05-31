@@ -12,7 +12,7 @@ public class RoomArranger : MonoBehaviour
 	private System.Random random;
 
 	public RoomArranger() {
-		int salt = 38325;
+		int salt = 3835;//38325;
 		random = new System.Random (salt);
 	}
 
@@ -64,7 +64,7 @@ public class RoomArranger : MonoBehaviour
 		float takenArea = 0;
 		float roomArea = room.size.x * room.size.y;
 		int counter = 0;
-		while (takenArea < roomArea*0.5 && counter < 20) {
+		while (takenArea < roomArea*0.4 && counter < 20) {
 			counter++; 
 
 			GameObject group = getRandomTile (furniture);
