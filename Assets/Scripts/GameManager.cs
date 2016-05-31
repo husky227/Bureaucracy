@@ -9,13 +9,16 @@ public class GameManager : MonoBehaviour {
 
 	private OneCorridorFloorGenerator floorGenerator;
 	private FloorRenderer renderer;
+	private RoomArranger arranger;
 
 	void Awake() {
 		floorGenerator = GetComponent<OneCorridorFloorGenerator> ();
 		floorGenerator.generateFloor ();
 
 		renderer = GetComponent<FloorRenderer> ();
+		arranger = GetComponent<RoomArranger> ();
 		renderer.renderFloor (floorGenerator);
+		arranger.arrangeFloor (floorGenerator);
 
 		/*roomManager = GetComponent<RoomManager> ();
 		floorGenerator = GetComponent<FloorGenerator> ();

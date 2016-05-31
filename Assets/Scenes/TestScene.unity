@@ -191,6 +191,7 @@ GameObject:
   - 114: {fileID: 422840079}
   - 114: {fileID: 422840081}
   - 114: {fileID: 422840080}
+  - 114: {fileID: 422840077}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -221,6 +222,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6ce3cd873fe4d2eade5a845aad3381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &422840077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422840074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44c763213c58407f9feaafc71359d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furniture:
+  - {fileID: 180128, guid: 2e43392577e364dfda35d0f90aea5720, type: 2}
+  - {fileID: 111680, guid: 1dd01a155a8bc401c8cd494ea0d81e48, type: 2}
+  - {fileID: 183744, guid: c5db6f8ac3c1248c3a2858bbdde92788, type: 2}
+  - {fileID: 108284, guid: a11f0cd1f869b4f039b4b7060b41c610, type: 2}
+  - {fileID: 184172, guid: aa144781c205e464a83c311e9dc37fa9, type: 2}
+  - {fileID: 155082, guid: 8496187bd4838477fa4dab297567f3f0, type: 2}
+  corridorGroups:
+  - {fileID: 170170, guid: 834a813049bbd4173ba0e9f0362cb8cf, type: 2}
+  roomGroups:
+  - {fileID: 141784, guid: 8ee5108a641024014a142fea86b8de37, type: 2}
+  - {fileID: 152002, guid: 3dd8c9ca7703d4a5dbdd3ea2575c9044, type: 2}
+  roomHolder: {fileID: 1050900175}
 --- !u!114 &422840079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,15 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTiles:
   - {fileID: 176728, guid: 2aab2d364c9884d24885aaa4994f126d, type: 2}
-  - {fileID: 176728, guid: 4c67d642815c445da97d3a8c70f28074, type: 2}
-  - {fileID: 176728, guid: 7f22ce65d3838469dba29eff205a448a, type: 2}
-  - {fileID: 176728, guid: f43d266207da54d86b60b2e01e690d2d, type: 2}
-  - {fileID: 176728, guid: 967067fef50894f90836774961c86ba7, type: 2}
-  - {fileID: 176728, guid: ebbe1704d4ea24f25b5d9bde832aeb68, type: 2}
-  - {fileID: 176728, guid: 37fa70e4c650d4872a6a4811af539d86, type: 2}
-  - {fileID: 176728, guid: d3f5166826b1144b49b94a58e1c57b44, type: 2}
-  - {fileID: 176728, guid: e6ca11979b00840f2885cafaf7d53f3b, type: 2}
-  - {fileID: 176728, guid: 4a79f8823095f4d9485ffc567eca6923, type: 2}
   wallTiles:
   - {fileID: 161644, guid: 74cec6212ab804a8fb63ea097fb06ce8, type: 2}
   ceilingTiles:

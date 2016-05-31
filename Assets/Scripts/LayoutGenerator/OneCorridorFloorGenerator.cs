@@ -84,6 +84,16 @@ public class OneCorridorFloorGenerator : MonoBehaviour
 			float width = roomRandom.Next (Config.MIN_ROOM_WIDTH, Config.MAX_ROOM_WIDTH);
 			float length = roomRandom.Next (Config.MIN_ROOM_WIDTH, Config.MAX_ROOM_WIDTH);
 
+
+			//do not overflow - there might some vertical side room
+			if (sumLength + width > corridor.size.x) {
+				if (Config.MIN_ROOM_WIDTH <= corridor.size.x - sumLength) {
+					width = corridor.size.x - sumLength;
+				} else {
+					break;
+				}
+			}
+
 			if (length + sumLength > corridor.size.x) {
 				length = corridor.size.x - sumLength;
 			}
@@ -98,10 +108,7 @@ public class OneCorridorFloorGenerator : MonoBehaviour
 				//room doors outside of corridor
 				room.doorPosition = 0;
 			}
-			//do not overflow - there might some vertical side room
-			if (sumLength + width > corridor.size.x) {
-				break;
-			}
+
 			sumLength += width;
 			rooms.Add (room);
 		}
