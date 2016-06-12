@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class RoomArranger : MonoBehaviour
 {
+	private int MAX_STAMPS = 3;
 	public GameObject[] furniture;
 	public GameObject[] corridorGroups;
 	public GameObject[] roomGroups;
+	public GameObject[] stamps;
 
 	public Transform roomHolder;
 	private System.Random random;
@@ -34,6 +36,7 @@ public class RoomArranger : MonoBehaviour
 			return;
 		}
 		placeFurniture (room);
+		placeStamps (room);
 	}
 
 	public void arrangeCorridor(Corridor corridor) {
@@ -91,6 +94,22 @@ public class RoomArranger : MonoBehaviour
 	}
 
 	private void arrangeStorageArea(Room room) {
+	}
+
+	private void placeStamps(Room room) {
+		GameObject stamp = getRandomTile (stamps);
+		int noOfStamps = random.Next ()%MAX_STAMPS + 1;
+		for (int i = 0; i < noOfStamps; i++) {
+
+			float minX = 0;
+			float maxX = room.size.x - minX;
+			float minY = 0;
+			float maxY = room.size.y - minY;
+
+			float x = (float)random.NextDouble ()*maxX + minX;
+			float y = (float)random.NextDouble ()*maxY + minY;
+			placeObject(stamp, new Vector3(room.position.x + x, room.position.y, room.position.z + y), new Vector3(1, 1, 1), new Vector3(0, 0, 0));
+		}
 	}
 		
 	private void placeObject(GameObject obj, Vector3 position, Vector3 scale, Vector3 rotate) {
