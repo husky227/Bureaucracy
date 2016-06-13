@@ -4,6 +4,7 @@ using System.Collections;
 public class StampCollector : MonoBehaviour {
 	GameObject player;
 	PlayerController playerController;
+	public Sprite stampSprite; 
 
 	bool active = true;
 
@@ -27,5 +28,21 @@ public class StampCollector : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+
+	void OnGUI() {
+		Sprite s = stampSprite;
+
+		Texture t = s.texture;
+		Rect tr = s.textureRect;
+		Rect r = new Rect(tr.x / t.width, tr.y / t.height, tr.width / t.width, tr.height / t.height );
+
+		float x = this.transform.position.x/Config.SCALE_RATIO;
+		float y = this.transform.position.z/Config.SCALE_RATIO;
+		float width = 2/Config.SCALE_RATIO;
+		float height = 2/Config.SCALE_RATIO;
+
+		GUI.DrawTextureWithTexCoords(new Rect(x, y, width, height), s.texture, r);
 	}
 }

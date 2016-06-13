@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
 
 	public int NO_OF_STAMPS = 10;
 
-	private float SCALE_RATIO = 0.75f;
 	public Sprite playerSprite; 
 
 	bool stopTime = false;
@@ -100,10 +99,10 @@ public class PlayerController : MonoBehaviour {
 		Rect tr = s.textureRect;
 		Rect r = new Rect(tr.x / t.width, tr.y / t.height, tr.width / t.width, tr.height / t.height );
 
-		float x = this.transform.position.x/SCALE_RATIO;
-		float y = this.transform.position.z/SCALE_RATIO;
-		float width = 10/SCALE_RATIO;
-		float height = 10/SCALE_RATIO;
+		float x = this.transform.position.x/Config.SCALE_RATIO;
+		float y = this.transform.position.z/Config.SCALE_RATIO;
+		float width = 1/Config.SCALE_RATIO;
+		float height = 1/Config.SCALE_RATIO;
 
 		GUI.DrawTextureWithTexCoords(new Rect(x, y, width, height), s.texture, r);
 	}

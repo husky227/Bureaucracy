@@ -21,7 +21,6 @@ public class OneCorridorFloorGenerator : MonoBehaviour
 		roomRandom = new System.Random (roomsSalt);
 
 		corridor = new Corridor ();
-		Debug.Log (corridor);
 		corridor.randomizeCorridor (corridorSalt);
 
 		if (!corridor.openSides.east) {

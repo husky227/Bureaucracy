@@ -142,7 +142,6 @@ public class RoomArranger : MonoBehaviour
 		BoxCollider[] cls2 = obj.GetComponentsInChildren<BoxCollider> ();
 		float length = 0;
 		foreach (BoxCollider cl in cls) {
-			Debug.Log (cl.size.y);
 			length = Mathf.Max (length, cl.size.y);
 		}
 		foreach (BoxCollider cl in cls2) {
