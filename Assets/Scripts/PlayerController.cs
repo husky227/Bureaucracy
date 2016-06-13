@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	private int count;
+	private int total;
 
 	public Text countText;
 	public Text winText;
@@ -16,8 +17,12 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		count = 0;	
+		total = 0;
 		winText.text = "";
+	}
 
+	void Awake() {
+		SetCountText ();
 	}
 	
 	// Update is called once per frame
@@ -25,6 +30,11 @@ public class PlayerController : MonoBehaviour {
 	
 	}
 
+	public void AddStamp() {
+		count = count + 1;
+		total = GameObject.FindGameObjectsWithTag("Stamp").Length;
+		SetCountText ();
+	}
 
 	void OnTriggerEnter(Collider other) 
 	{
@@ -39,10 +49,10 @@ public class PlayerController : MonoBehaviour {
 
 	void SetCountText ()
 	{
-		countText.text = "Count: " + count.ToString ();
-		if (count >= NO_OF_STAMPS)
+		countText.text = "Count: " + count.ToString () + " / " + total.ToString();
+		if (count >= total)
 		{
-			winText.text = "Win!";
+			winText.text = "Run to the elevator!!!";
 		}
 	}
 
