@@ -13,6 +13,31 @@ public class RoomArranger : MonoBehaviour
 	public Transform roomHolder;
 	private System.Random random;
 
+	class Rectangle {
+		public Vector2 position;
+		public Vector2 size;
+
+		public bool IsIntersectingX(Rectangle room) {
+			if (room.position.x < position.x) {
+				return room.position.x + room.size.x >= position.x;
+			}
+			return position.x + size.x >= room.position.x;
+		}
+
+		public bool IsIntersectingY(Rectangle room) {
+			if (room.position.y < position.y) {
+				return room.position.y + room.size.y >= position.y;
+			}
+			return position.y + size.y >= room.position.y;
+		}
+
+		public bool IsIntersecting(Rectangle room) {
+			return IsIntersectingX(room) && IsIntersectingY(room);
+		}
+	}
+
+	private List<Rectangle> furnitures = new List<Rectangle>();
+
 	public RoomArranger() {
 		int salt = 3835;//38325;
 		random = new System.Random (salt);
@@ -67,7 +92,7 @@ public class RoomArranger : MonoBehaviour
 		float takenArea = 0;
 		float roomArea = room.size.x * room.size.y;
 		int counter = 0;
-		while (takenArea < roomArea*0.4 && counter < 20) {
+		while (takenArea < roomArea*0.4 && counter < 200) {
 			counter++; 
 
 			GameObject group = getRandomTile (furniture);
@@ -75,8 +100,8 @@ public class RoomArranger : MonoBehaviour
 			float length = getLength (group);
 
 			//add some space
-			width *= 1.5f;
-			length *= 1.5f;
+			width = width + 2f;
+			length = length + 2f;
 			float minX = width;
 			float maxX = room.size.x - width - minX;
 			float minY = length;
@@ -85,8 +110,24 @@ public class RoomArranger : MonoBehaviour
 			float x = (float)random.NextDouble ()*maxX + minX;
 			float y = (float)random.NextDouble ()*maxY + minY;
 
-			placeObject(group, new Vector3(room.position.x + x, room.position.y, room.position.z + y), new Vector3(1, 1, 1), new Vector3(0, 0, 0));
+			Rectangle furnitureRectangle = new Rectangle ();
+			furnitureRectangle.position = new Vector2 (x, y);
+			furnitureRectangle.size = new Vector2 (width, length);
+			bool intersect = IsIntersecting (furnitureRectangle);
+
+			if (!intersect) {
+				furnitures.Add (furnitureRectangle);
+				placeObject (group, new Vector3 (room.position.x + x, room.position.y, room.position.z + y), new Vector3 (1, 1, 1), new Vector3 (0, 0, 0));
+			}
 		}
+	}
+
+	private bool IsIntersecting(Rectangle furniture) {
+		bool isIntersecting = false;
+		foreach(Rectangle rectangle in furnitures) {
+			isIntersecting = isIntersecting || rectangle.IsIntersecting (furniture);
+		}
+		return isIntersecting;
 	}
 
 	private void arrangeBathroom (Room room) {
@@ -127,27 +168,35 @@ public class RoomArranger : MonoBehaviour
 	private float getWidth(GameObject obj) {
 		BoxCollider[] cls = obj.GetComponents<BoxCollider> ();
 		BoxCollider[] cls2 = obj.GetComponentsInChildren<BoxCollider> ();
-		float width = 0;
+		float minLength = 0;
+		float maxLength = 0;
+		float length = 0;
 		foreach (BoxCollider cl in cls) {
-			width = Mathf.Max (width, cl.size.x);
+			minLength = Mathf.Min (minLength, cl.bounds.min.x);
+			maxLength = Mathf.Max (maxLength, cl.bounds.max.x);
 		}
 		foreach (BoxCollider cl in cls2) {
-			width = Mathf.Max (width, cl.size.x);
+			minLength = Mathf.Min (minLength, cl.bounds.min.x);
+			maxLength = Mathf.Max (maxLength, cl.bounds.max.x);
 		}
-		return width;
+		return maxLength-minLength;
 	}
 
 	private float getLength(GameObject obj) {
 		BoxCollider[] cls = obj.GetComponents<BoxCollider> ();
 		BoxCollider[] cls2 = obj.GetComponentsInChildren<BoxCollider> ();
+		float minLength = 0;
+		float maxLength = 0;
 		float length = 0;
 		foreach (BoxCollider cl in cls) {
-			length = Mathf.Max (length, cl.size.y);
+			minLength = Mathf.Min (minLength, cl.bounds.min.z);
+			maxLength = Mathf.Max (maxLength, cl.bounds.max.z);
 		}
 		foreach (BoxCollider cl in cls2) {
-			length = Mathf.Max (length, cl.size.y);
+			minLength = Mathf.Min (minLength, cl.bounds.min.z);
+			maxLength = Mathf.Max (maxLength, cl.bounds.max.z);
 		}
-		return length;
+		return maxLength-minLength;
 	}
 }
 
