@@ -46,7 +46,10 @@ public class PlayerController : MonoBehaviour {
 
 	public void AddStamp() {
 		count = count + 1;
-		total = GameObject.FindGameObjectsWithTag("Stamp").Length;
+		int newTotal = GameObject.FindGameObjectsWithTag("Stamp").Length;
+		if (newTotal > total) {
+			total = newTotal;
+		}
 		SetCountText ();
 	}
 
@@ -66,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 
 	void SetCountText ()
 	{
-		countText.text = "Found: " + count.ToString () + "\n" + "Left: " + total.ToString();
+		countText.text = "Count:" + count.ToString () + "/" + total.ToString();
 		if (count >= total)
 		{
 			winText.text = "Run to the elevator!!!";
