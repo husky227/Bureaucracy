@@ -9,6 +9,7 @@ public class RoomArranger : MonoBehaviour
 	public GameObject[] corridorGroups;
 	public GameObject[] roomGroups;
 	public GameObject[] stamps;
+	public GameObject[] npcs;
 
 	public Transform roomHolder;
 	private System.Random random;
@@ -92,10 +93,22 @@ public class RoomArranger : MonoBehaviour
 		float takenArea = 0;
 		float roomArea = room.size.x * room.size.y;
 		int counter = 0;
+		furnitures = new List<Rectangle> ();
+
+		bool isNpcSet = false;
+		bool isNpcNeeded = (random.NextDouble () > 0.5f);
+		bool settingNpc  = false;
+
 		while (takenArea < roomArea*0.4 && counter < 200) {
 			counter++; 
 
 			GameObject group = getRandomTile (furniture);
+
+			if (!isNpcSet && isNpcNeeded) {
+				group = getRandomTile (npcs);
+				settingNpc = true;
+			}
+
 			float width = getWidth (group);
 			float length = getLength (group);
 
@@ -118,6 +131,12 @@ public class RoomArranger : MonoBehaviour
 			if (!intersect) {
 				furnitures.Add (furnitureRectangle);
 				placeObject (group, new Vector3 (room.position.x + x, room.position.y, room.position.z + y), new Vector3 (1, 1, 1), new Vector3 (0, 0, 0));
+
+				if (settingNpc) {
+					settingNpc = false;
+					isNpcNeeded = false;
+					isNpcSet = true;
+				}
 			}
 		}
 	}
@@ -170,7 +189,6 @@ public class RoomArranger : MonoBehaviour
 		BoxCollider[] cls2 = obj.GetComponentsInChildren<BoxCollider> ();
 		float minLength = 0;
 		float maxLength = 0;
-		float length = 0;
 		foreach (BoxCollider cl in cls) {
 			minLength = Mathf.Min (minLength, cl.bounds.min.x);
 			maxLength = Mathf.Max (maxLength, cl.bounds.max.x);
@@ -187,7 +205,6 @@ public class RoomArranger : MonoBehaviour
 		BoxCollider[] cls2 = obj.GetComponentsInChildren<BoxCollider> ();
 		float minLength = 0;
 		float maxLength = 0;
-		float length = 0;
 		foreach (BoxCollider cl in cls) {
 			minLength = Mathf.Min (minLength, cl.bounds.min.z);
 			maxLength = Mathf.Max (maxLength, cl.bounds.max.z);

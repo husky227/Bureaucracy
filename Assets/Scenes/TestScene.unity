@@ -248,6 +248,8 @@ MonoBehaviour:
   - {fileID: 152002, guid: 3dd8c9ca7703d4a5dbdd3ea2575c9044, type: 2}
   stamps:
   - {fileID: 109406, guid: da9276653bcd34f6c8f9dc9e71f877e5, type: 2}
+  npcs:
+  - {fileID: 151114, guid: a51f4794a67174f458d546535445e4ee, type: 2}
   roomHolder: {fileID: 1050900175}
 --- !u!114 &422840079
 MonoBehaviour:
