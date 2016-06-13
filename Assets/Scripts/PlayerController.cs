@@ -6,8 +6,13 @@ public class PlayerController : MonoBehaviour {
 	private int count;
 	private int total;
 
+    private int minutes;
+    private int seconds;
+    private int miliseconds;
+
 	public Text countText;
 	public Text winText;
+    public Text timeText;
 
 	public int NO_OF_STAMPS = 10;
 
@@ -18,16 +23,21 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		count = 0;	
 		total = 0;
+        minutes = 0;
+        seconds = 0;
+        miliseconds = 0;
 		winText.text = "";
 	}
 
 	void Awake() {
 		SetCountText ();
+        SetTimeText ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        UpdateTime();
+        SetTimeText ();
 	}
 
 	public void AddStamp() {
@@ -46,7 +56,6 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-
 	void SetCountText ()
 	{
 		countText.text = "Count: " + count.ToString () + " / " + total.ToString();
@@ -55,6 +64,18 @@ public class PlayerController : MonoBehaviour {
 			winText.text = "Run to the elevator!!!";
 		}
 	}
+
+    void UpdateTime ()
+    {
+        minutes = (int)Time.time / 60;
+        seconds = (int)Time.time % 60;
+        miliseconds = (int)(Time.time * 100) % 100;
+    }
+
+    void SetTimeText ()
+    {
+        timeText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, miliseconds); 
+    }
 
 	void OnGUI() {
 		Sprite s = playerSprite;
