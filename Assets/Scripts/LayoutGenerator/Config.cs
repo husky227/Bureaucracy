@@ -18,5 +18,7 @@ public class Config
 	public const float MAX_BATHROOM_AREA = 25f;
 
 	public const float MAX_STORAGE_AREA = 25f;
+
+	public const float SCALE_RATIO = 0.25f;
 }
 
