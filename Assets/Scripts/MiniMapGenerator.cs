@@ -27,8 +27,10 @@ public class MiniMapGenerator : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		foreach (RoomInfo room in rooms) {
-			drawTile (room.position, room.size);
+		if (rooms != null) {
+			foreach (RoomInfo room in rooms) {
+				drawTile (room.position, room.size);
+			}
 		}
 	}
 }

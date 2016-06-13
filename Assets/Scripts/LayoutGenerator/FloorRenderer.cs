@@ -8,6 +8,7 @@ public class FloorRenderer : MonoBehaviour
 	public GameObject[] ceilingTiles;
 	public GameObject[] ceilingLamps;
 	public GameObject[] doors;
+	public GameObject[] elevators;
 
 	public Transform roomHolder;
 
@@ -16,8 +17,10 @@ public class FloorRenderer : MonoBehaviour
 		GameObject door = getRandomTile(doors);
 		GameObject ceiling = getRandomTile(ceilingTiles);
 		GameObject lamp = getRandomTile(ceilingLamps);
+		GameObject elevator = getRandomTile(elevators);
 
 		drawFloor (generator.corridor.position, generator.corridor.size, floor);
+		drawElevator (generator.corridor.position, generator.corridor.size, elevator);
 		drawCeiling (generator.corridor.position, generator.corridor.size, ceiling);
 		floor = getRandomTile(floorTiles);
 		GameObject wall = getRandomTile(wallTiles);
@@ -31,6 +34,12 @@ public class FloorRenderer : MonoBehaviour
 
 		placeLamps (generator.corridor.position, generator.corridor.size, lamp);
 		drawCorridorFloors (generator.corridor, wall);
+	}
+
+	public void drawElevator (Vector3 position, Vector2 size, GameObject elevator) {
+		Vector3 elevatorPosition = new Vector3(position.x + size.x/2, position.y, position.z + size.y/2);
+		GameObject instance = Instantiate (elevator, elevatorPosition, Quaternion.identity) as GameObject;
+		instance.transform.SetParent (roomHolder);
 	}
 
 	public void drawFloor(Vector3 position, Vector2 size, GameObject floor) {
