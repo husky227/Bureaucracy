@@ -250,6 +250,7 @@ MonoBehaviour:
   - {fileID: 109406, guid: da9276653bcd34f6c8f9dc9e71f877e5, type: 2}
   npcs:
   - {fileID: 151114, guid: a51f4794a67174f458d546535445e4ee, type: 2}
+  - {fileID: 123772, guid: deff8841372fc4126895e9738f8394cf, type: 2}
   roomHolder: {fileID: 1050900175}
 --- !u!114 &422840079
 MonoBehaviour:
