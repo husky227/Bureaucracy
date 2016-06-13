@@ -282,6 +282,8 @@ MonoBehaviour:
   - {fileID: 179298, guid: 2fa97d29375bda64080d41087c0c107c, type: 2}
   doors:
   - {fileID: 146288, guid: 2e04ccc3353634fa9a428fa3f0871a82, type: 2}
+  elevators:
+  - {fileID: 148464, guid: 0c60ecf1884014d06bda8469fa4ff423, type: 2}
   roomHolder: {fileID: 1050900175}
 --- !u!114 &422840081
 MonoBehaviour:
@@ -387,7 +389,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &840726368
 MonoBehaviour:
@@ -560,7 +562,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -80, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1142568805
 MonoBehaviour:

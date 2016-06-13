@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 406182}
+  - 114: {fileID: 11452598}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -131,6 +132,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.000002, y: 10, z: 8.000002}
   m_Center: {x: -0.0000004768371, y: 0, z: 0.0000004768371}
+--- !u!114 &11452598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4480e95c46e4f59920350a58e350a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

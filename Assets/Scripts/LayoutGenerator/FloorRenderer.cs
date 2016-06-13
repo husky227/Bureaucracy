@@ -40,6 +40,7 @@ public class FloorRenderer : MonoBehaviour
 		Vector3 elevatorPosition = new Vector3(position.x + size.x/2, position.y, position.z + size.y/2);
 		GameObject instance = Instantiate (elevator, elevatorPosition, Quaternion.identity) as GameObject;
 		instance.transform.SetParent (roomHolder);
+		instance.transform.localScale = new Vector3(0.6f, 1.0f, 0.6f);
 	}
 
 	public void drawFloor(Vector3 position, Vector2 size, GameObject floor) {

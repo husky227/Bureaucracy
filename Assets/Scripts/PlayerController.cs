@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 	private float SCALE_RATIO = 0.75f;
 	public Sprite playerSprite; 
 
+	bool stopTime = false;
+
 	// Use this for initialization
 	void Start () {
 		count = 0;	
@@ -36,7 +38,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        UpdateTime();
+		if (!stopTime) {
+			UpdateTime ();
+		}
         SetTimeText ();
 	}
 
@@ -56,13 +60,22 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public bool AreAllStampsCollected() {
+		return (count >= total);
+	}
+
 	void SetCountText ()
 	{
-		countText.text = "Count: " + count.ToString () + " / " + total.ToString();
+		countText.text = "Found: " + count.ToString () + "\n" + "Left: " + total.ToString();
 		if (count >= total)
 		{
 			winText.text = "Run to the elevator!!!";
 		}
+	}
+
+	public void LevelOver() {
+		winText.text = "DONE!";
+		stopTime = true;
 	}
 
     void UpdateTime ()
